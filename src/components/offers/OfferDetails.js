@@ -7,48 +7,48 @@ import EditOffer from './EditOffer';
 
 
 class OfferDetails extends Component {
-  constructor(props){
-      super(props);
-      this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
-  componentDidMount(){
-      this.getSingleOffer();
+  componentDidMount() {
+    this.getSingleOffer();
   }
 
   getSingleOffer = () => {
-      const { params } = this.props.match;
-      axios.get(`${process.env.REACT_APP_API_URL}/api/offers/${params.id}`, {withCredentials:true})
-      .then( responseFromApi =>{
-          const theOffer = responseFromApi.data;
-          this.setState(theOffer);
+    const { params } = this.props.match;
+    axios.get(`${process.env.REACT_APP_API_URL}/api/offers/${params.id}`, { withCredentials: true })
+      .then(responseFromApi => {
+        const theOffer = responseFromApi.data;
+        this.setState(theOffer);
       })
-      .catch((err)=>{
-          console.log(err)
+      .catch((err) => {
+        console.log(err)
       })
   }
   renderEditForm = () => {
-    if(!this.state.title){
+    if (!this.state.title) {
       this.getSingleOffer();
     } else {
-    //                                                    {...props} => so we can have 'this.props.history' in Edit.js
-    //                                                                                          ^
-    //                                                                                          |
+      //                                                    {...props} => so we can have 'this.props.history' in Edit.js
+      //                                                                                          ^
+      //                                                                                          |
       return <EditOffer the={this.state} getTheOffer={this.getSingleOffer} {...this.props} />
-        
+
     }
   }
-  
+
   // DELETE PROJECT:
   deleteOffer = () => {
     const { params } = this.props.match;
-    axios.delete(`${process.env.REACT_APP_API_URL}/api/offers/${params.id}`, {withCredentials:true})
-    .then( () =>{
+    axios.delete(`${process.env.REACT_APP_API_URL}/api/offers/${params.id}`, { withCredentials: true })
+      .then(() => {
         this.props.history.push('/offers'); // !!!         
-    })
-    .catch((err)=>{
+      })
+      .catch((err) => {
         console.log(err)
-    })
+      })
   }
 
   // renderAddTaskForm = () => {
@@ -70,22 +70,34 @@ class OfferDetails extends Component {
   //     )
   //   } 
   // }
-  render(){
-    return(
-      <div>
-        <h1>{this.state.title}</h1>
-        <p>{this.state.description}</p>
-        <p>{this.state.price}</p>
-        <p>{this.state.unity}</p>
-        <p>{this.state.minimum}</p>
-        <p>{this.state.category}</p>
-        <p>{this.state.owner}</p>
-        {/* <div >
+
+
+
+  render() {
+    console.log(this.state.owner)
+    // console.log(this.state.owner.email)
+    if (this.state.owner) {
+      return (
+        <div>
+          <h1>{this.state.title}</h1>
+          <p>{this.state.description}</p>
+          <p>{this.state.price}</p>
+          <p>{this.state.unity}</p>
+          <p>{this.state.minimum}</p>
+          <p>{this.state.category}</p>
+          <p>{this.state.owner.fullName}</p>
+          {/* <div>
           {this.ownershipCheck(this.state)}
         </div> */}
-        <Link to={'/offers'}>Back to offers</Link>
-      </div>
-    )
+          <Link to={'/offers'}>Back to offers</Link>
+        </div>
+      )
+    }
+    else{
+      return(
+        <div>XX</div>
+      )
+    }
   }
 }
 
@@ -108,7 +120,7 @@ export default OfferDetails;
 //                   </Link>
 //               </div>
 //           )
-          
+
 //       }) }
 //       <div >
 //       {this.ownershipCheck(this.state)}

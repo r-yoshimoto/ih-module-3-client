@@ -7,6 +7,8 @@ import NavBar from './components/navbar/NavBar';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/Signup';
 import Joc from './components/Joc';
+import OfferList from './components/offers/OfferList';
+ import OfferDetails from './components/offers/OfferDetails';
 
 class App extends Component {
 
@@ -49,6 +51,8 @@ class App extends Component {
           <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
           <Route exact path="/" render={() => <Joc />} />
+          <Route path='/offers/:id' component={OfferDetails}/>
+          <Route path='/offers' component={OfferList}/>
           </Switch>
         </section>
       );
@@ -59,6 +63,8 @@ class App extends Component {
             <Switch> 
               <Route exact path='/signup' render={() => <SignUp getUser={this.getTheUser}/>}/>
               <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
+              <Route path='/offers/:id' component={OfferDetails}/>
+              <Route path='/offers' component={OfferList}/>
             </Switch>
         </section>
       );
