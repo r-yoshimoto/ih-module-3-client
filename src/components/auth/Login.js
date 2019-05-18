@@ -22,10 +22,13 @@ class Login extends Component {
           pathname: '/'
         }} />
       })
-      .catch(error => 
+      .catch(error => {
+        console.log("aaaaa", error)
+
         this.setState({
         message: `${error.response.data.message}`
-      }))
+      })
+  })
   }
 
   handleChange = (event) => {
