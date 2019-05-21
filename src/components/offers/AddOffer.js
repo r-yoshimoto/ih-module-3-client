@@ -10,7 +10,7 @@ class AddOffer extends Component {
        price: "",
        unity: "",
        minimum: "",
-       category: "",
+       category: "Fruits",
        owner: ""
       };
   }

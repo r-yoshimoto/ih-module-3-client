@@ -7,7 +7,9 @@ import NavBar from './components/navbar/NavBar';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/Signup';
 import Confirm from './components/auth/Confirm';
-import Joc from './components/Joc'
+import Joc from './components/Joc';
+import OfferList from './components/offers/OfferList';
+import OfferDetails from './components/offers/OfferDetails';
 
 class App extends Component {
 
@@ -50,6 +52,8 @@ class App extends Component {
           <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
           <Route exact path="/" component={Joc} />
+          <Route path='/offers/:id' component={OfferDetails}/>
+          <Route path='/offers' component={OfferList}/>
           </Switch>
         </section>
       );
@@ -61,6 +65,9 @@ class App extends Component {
               <Route exact path='/signup' render={() => <SignUp getUser={this.getTheUser}/>}/>
               <Route exact path='/confirm/:token' render={(props) => <Confirm getUser={this.getTheUser} {...props} />} />
               <Route exact path='/login' render={(props) => <Login getUser={this.getTheUser} {...props}/>}/>
+              <Route path='/offers/:id' component={OfferDetails}/>
+              <Route path='/offers' component={OfferList}/>
+
             </Switch>
         </section>
       );
