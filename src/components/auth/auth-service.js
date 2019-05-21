@@ -14,6 +14,16 @@ class AuthService {
       // .catch(error => console.log(error))
   }
 
+  resendConfirmation = (token) => {
+    return this.service.get(`/confirm/resend/${token}`)
+    .then(response => response.data)
+  }
+
+  confirmEmail = (token) => {
+    return this.service.get(`/confirm/${token}`)
+    .then(response => response.data)
+  }
+
   loggedin = () => {
     return this.service.get('/loggedin')
     .then(response => response.data)

@@ -6,9 +6,27 @@ import { Link, Redirect } from 'react-router-dom';
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { email: '', password: '', message: this.props.location.state ? this.props.location.state.message : null };
     this.service = new AuthService();
   }
+
+  
+  handleResend = (e) => {
+      e.preventDefault();
+      const { token } = this.state;
+      this.service.resendConfirmation(token)
+      .then(response => {
+        this.setState({
+          token: null,
+          message: `${response.message}` 
+        })
+      })
+      .catch(error => {
+        console.log(error)
+        this.setState({
+        message: `${error.response.data.message}`})
+      });
+    }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -16,16 +34,12 @@ class Login extends Component {
 
     this.service.login(email, password)
       .then(response => {
-        this.setState({ email: "", password: "" });
-        this.props.getUser(response)
-        return <Redirect to={{
-          pathname: '/'
-        }} />
+        this.setState({ email: "", password: "", loggedInUser: true  });
+        this.props.getUser(response.userDetail)
       })
       .catch(error => {
-        console.log("aaaaa", error)
-
         this.setState({
+        token: error.response.data.token ? `${error.response.data.token}` : null,
         message: `${error.response.data.message}`
       })
   })
@@ -38,9 +52,19 @@ class Login extends Component {
 
   render() {
 
+    if(this.state.loggedInUser) {
+return (
+      <Redirect to={{
+        pathname: '/'
+    }}
+/>
+)
+    }
+    else {
     return (
+
       <section className='section'>
-        <form onSubmit={this.handleFormSubmit}>
+        <form onSubmit={(e) => this.handleFormSubmit(e)}>
           <div className="field">
             <label className="label">email</label>
             <div className="control">
@@ -55,11 +79,21 @@ class Login extends Component {
           </div>
 
           {
-            this.state.message &&
+            this.state.message && !!this.state.token &&
             (<article className="message is-warning">
               <div className="message-header">
                 <p>System Message</p>
-                <button className="delete" aria-label="delete"></button>
+              </div>
+              <div className="message-body">
+                <strong>{this.state.message} <a href="#" onClick={this.handleResend}>Click here to resend.</a></strong>
+              </div>
+            </article>)
+          }
+          {
+            this.state.message && !this.state.token &&
+            (<article className="message is-warning">
+              <div className="message-header">
+                <p>System Message</p>
               </div>
               <div className="message-body">
                 <strong>{this.state.message}</strong>
@@ -87,6 +121,7 @@ class Login extends Component {
         </div>
       </section>
     )
+  }
   }
 }
 export default Login;

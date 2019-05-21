@@ -72,7 +72,6 @@ class SignUp extends Component {
             (<article className="message is-warning">
               <div className="message-header">
                 <p>System Message</p>
-                <button className="delete" aria-label="delete"></button>
               </div>
               <div className="message-body">
                 <strong>{this.state.message}</strong>
