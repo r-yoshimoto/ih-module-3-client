@@ -10,6 +10,7 @@ class OfferDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
   }
 
   componentDidMount() {
@@ -71,24 +72,7 @@ class OfferDetails extends Component {
     // } 
   }
 
-  createOrder = () =>{
-    const title = this.state.title;
-    const description = this.state.description;
-    const price = this.state.price;
-    const unity = this.state.unity;
-    const minimum = this.state.minimum;
-    const category = this.state.category;
-    const total = this.state.total;
-
-    axios.post(`${process.env.REACT_APP_API_URL}/api/offers`, {
-      title, description, price, unity, minimum, category, total
-     }, {withCredentials:true})
-   .then( () => {
-       this.props.getData();
-       this.setState({total: ""});
-   })
-   .catch( error => console.log(error) )
-  }
+  
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -99,20 +83,26 @@ class OfferDetails extends Component {
     const minimum = this.state.minimum;
     const category = this.state.category;
     const total = this.state.total;
+    const totalPrice = this.state.totalPrice;
+    const owner = this.state.owner;
     
     axios.post(`${process.env.REACT_APP_API_URL}/api/orders`, {
-       title, description, price, unity, minimum, category
+       title, description, price, unity, minimum, category, total, totalPrice, owner
       }, {withCredentials:true})
     .then( () => {
-        this.props.getData();
-        this.setState({total: ""});
+        // this.props.getData();
+        // this.setState({total: ""});
     })
     .catch( error => console.log(error) )
   }
 
   handleChange = (event) => {  
       const {name, value} = event.target;
-      this.setState({[name]: value});
+      this.setState({[name]: value}, () => {
+        this.setState({ totalPrice: this.state.price*this.state.total})
+      });
+      console.log(this.state.price);
+      console.log(this.state.total);
   }
 
   render() {
@@ -133,24 +123,27 @@ class OfferDetails extends Component {
           </div>
           <div>
           <form onSubmit={this.handleFormSubmit}>
-          <label>Title:</label>
-          <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
-          <label>Description:</label>
-          <textarea name="description" value={this.state.description} onChange={ e => this.handleChange(e)} />
-          <label>Price:</label>
-          <input type="number" name="price" value={this.state.price} onChange={ e => this.handleChange(e)} />
-          <label>Unity:</label>
-          <input type="text"  name="unity" value={this.state.unity} onChange={ e => this.handleChange(e)} />
-          <label>Minimum:</label>
-          <input type="number" name="minimum" value={this.state.minimum} onChange={ e => this.handleChange(e)} />
-          <label>Category:</label>
-          <select name='category' value={this.state.category} onChange={ e => this.handleChange(e)} >
-            <option value="Fruits">Fruits</option>
-            <option value="Flowers">Flowers</option>
-            <option value="Fish">Fish</option>
-            <option value="Vegetables">Vegetables</option>
-            <option value="None of above">None of above</option>    
-          </select>
+          
+          <input type="hidden" name="title" value={this.state.title} />
+          
+          <input type="hidden" name="description" value={this.state.description}  />
+          
+          <input type="hidden" name="price" value={this.state.price}  />
+          
+          <input type="hidden"  name="unity" value={this.state.unity}  />
+          
+          <input type="hidden" name="minimum" value={this.state.minimum}  />
+          
+          <input type="hidden" name="category" value={this.state.category}  /> 
+
+          <input type="hidden" name="owner" value={this.state.owner}  />   
+          
+          <label>Quantity</label>
+          <input type="number" name="total" value={this.state.total} onChange={ e => this.handleChange(e)} /> 
+
+          <label>Total Price: {this.state.totalPrice}</label>
+
+
           <input type="submit" value="Submit" />
         </form>
 
