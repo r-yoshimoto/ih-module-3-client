@@ -10,6 +10,8 @@ import Confirm from './components/auth/Confirm';
 import Joc from './components/Joc';
 import OfferList from './components/offers/OfferList';
 import OfferDetails from './components/offers/OfferDetails';
+import OrderList from './components/orders/OrderList';
+import OrderDetails from './components/orders/OrderDetails'
 
 class App extends Component {
 
@@ -46,14 +48,16 @@ class App extends Component {
 
   render() {
     this.fetchUser()
-    if(this.state.loggedInUser){
+    if (this.state.loggedInUser) {
       return (
         <section>
           <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
-          <Route exact path="/" component={Joc} />
-          <Route path='/offers/:id' component={OfferDetails}/>
-          <Route path='/offers' component={OfferList}/>
+            <Route exact path="/" component={Joc} />
+            <Route path='/offers/:id' component={OfferDetails} />
+            <Route path='/offers' component={OfferList} />
+            <Route path='/orders/:id' component={OrderDetails} />
+            <Route path='/orders' component={OrderList} />
           </Switch>
         </section>
       );
@@ -61,18 +65,18 @@ class App extends Component {
       return (
         <section>
           <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
-            <Switch> 
-              <Route exact path='/signup' render={() => <SignUp getUser={this.getTheUser}/>}/>
-              <Route exact path='/confirm/:token' render={(props) => <Confirm getUser={this.getTheUser} {...props} />} />
-              <Route exact path='/login' render={(props) => <Login getUser={this.getTheUser} {...props}/>}/>
-              <Route path='/offers/:id' component={OfferDetails}/>
-              <Route path='/offers' component={OfferList}/>
+          <Switch>
+            <Route exact path='/signup' render={() => <SignUp getUser={this.getTheUser} />} />
+            <Route exact path='/confirm/:token' render={(props) => <Confirm getUser={this.getTheUser} {...props} />} />
+            <Route exact path='/login' render={(props) => <Login getUser={this.getTheUser} {...props} />} />
+            <Route path='/offers/:id' component={OfferDetails} />
+            <Route path='/offers' component={OfferList} />
 
-            </Switch>
+          </Switch>
         </section>
       );
-}
-}
+    }
+  }
 }
 
 export default App;
