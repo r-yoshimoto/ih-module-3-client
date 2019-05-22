@@ -62,17 +62,19 @@ class OfferDetails extends Component {
   // }
 
   ownershipCheck = (offer) => {
-    // if(this.props.loggedInUser && project.owner === this.props.loggedInUser._id){
-      return (
-        <div>
-          <div>{this.renderEditForm()} </div>
-          <button onClick={() => this.deleteOffer(this.state._id)}>Delete offer</button>
-        </div>
-      )
+    console.log(this.props.loggedInUser);
+    console.log(offer.owner);
+    // if(this.props.loggedInUser && offer.owner === this.props.loggedInUser._id){
+    return (
+      <div>
+        <div>{this.renderEditForm()} </div>
+        <button onClick={() => this.deleteOffer(this.state._id)}>Delete offer</button>
+      </div>
+    )
     // } 
   }
 
-  
+
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -84,31 +86,30 @@ class OfferDetails extends Component {
     const category = this.state.category;
     const total = this.state.total;
     const totalPrice = this.state.totalPrice;
-    const owner = this.state.owner;
-    
+    const owner = this.state.owner._id;
+    console.log(owner)
     axios.post(`${process.env.REACT_APP_API_URL}/api/orders`, {
-       title, description, price, unity, minimum, category, total, totalPrice, owner
-      }, {withCredentials:true})
-    .then( () => {
-        // this.props.getData();
-        // this.setState({total: ""});
-    })
-    .catch( error => console.log(error) )
+      title, description, price, unity, minimum, category, total, totalPrice, owner
+    }, { withCredentials: true })
+      .then(() => {
+        this.props.history.push('/orders');   
+      })
+      .catch(error => console.log(error))
   }
 
-  handleChange = (event) => {  
-      const {name, value} = event.target;
-      this.setState({[name]: value}, () => {
-        this.setState({ totalPrice: this.state.price*this.state.total})
-      });
-      console.log(this.state.price);
-      console.log(this.state.total);
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value }, () => {
+      this.setState({ totalPrice: this.state.price * this.state.total })
+    });
+
   }
 
   render() {
-    console.log(this.state.owner)
-    // console.log(this.state.owner.email)
+    // console.log(this.state.owner)
+    // console.log(this.state.owner._id)
     if (this.state.owner) {
+      // console.log(this.state.owner._id)
       return (
         <div>
           <h1>{this.state.title}</h1>
@@ -119,43 +120,32 @@ class OfferDetails extends Component {
           <p>{this.state.category}</p>
           <p>{this.state.owner.fullName}</p>
           <div>
-          {this.ownershipCheck(this.state)}
+            {this.ownershipCheck(this.state)}
           </div>
           <div>
-          <form onSubmit={this.handleFormSubmit}>
-          
-          <input type="hidden" name="title" value={this.state.title} />
-          
-          <input type="hidden" name="description" value={this.state.description}  />
-          
-          <input type="hidden" name="price" value={this.state.price}  />
-          
-          <input type="hidden"  name="unity" value={this.state.unity}  />
-          
-          <input type="hidden" name="minimum" value={this.state.minimum}  />
-          
-          <input type="hidden" name="category" value={this.state.category}  /> 
-
-          <input type="hidden" name="owner" value={this.state.owner}  />   
-          
-          <label>Quantity</label>
-          <input type="number" name="total" value={this.state.total} onChange={ e => this.handleChange(e)} /> 
-
-          <label>Total Price: {this.state.totalPrice}</label>
+            <form onSubmit={this.handleFormSubmit}>
+              <input type="hidden" name="title" value={this.state.title} />
+              <input type="hidden" name="description" value={this.state.description} />
+              <input type="hidden" name="price" value={this.state.price} />
+              <input type="hidden" name="unity" value={this.state.unity} />
+              <input type="hidden" name="minimum" value={this.state.minimum} />
+              <input type="hidden" name="category" value={this.state.category} />
+              <input type="hidden" name="owner" value={this.state.owner._id} />
+              <label>Quantity</label>
+              <input type="number" name="total" value={this.state.total} onChange={e => this.handleChange(e)} />
+              <label>Total Price: {this.state.totalPrice}</label>
+              <input type="submit" value="Submit" />
+            </form>
 
 
-          <input type="submit" value="Submit" />
-        </form>
-
-          
           </div>
 
           <Link to={'/offers'}>Back to offers</Link>
         </div>
       )
     }
-    else{
-      return(
+    else {
+      return (
         <div>XX</div>
       )
     }
