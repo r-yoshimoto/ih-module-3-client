@@ -47,7 +47,7 @@ class OrderList extends Component {
             console.log(order.owner)
             console.log(order.buyer)
             console.log(this.props.loggedInUser)
-            // if(order.owner._id === this.props.loggedInUser._id){
+            if(order.owner._id === this.props.loggedInUser._id || order.buyer._id === this.props.loggedInUser._id  ){
             return (
               <div key={order._id}>
                 <Link to={`/orders/${order._id}`}>
@@ -62,7 +62,7 @@ class OrderList extends Component {
                 {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}
               </div>
             )
-              // }
+              }
           })
           }
         </div>
