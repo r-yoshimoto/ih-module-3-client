@@ -68,7 +68,11 @@ class OfferDetails extends Component {
     return (
       <div>
         <div>{this.renderEditForm()} </div>
-        <button onClick={() => this.deleteOffer(this.state._id)}>Delete offer</button>
+        <div className="field is-group">
+        <div className="control">
+        <button className="button is-danger" onClick={() => this.deleteOffer(this.state._id)}>Delete offer</button>
+        </div>
+        </div>
       </div>
     )
     } 

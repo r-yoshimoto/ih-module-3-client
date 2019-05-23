@@ -12,6 +12,7 @@ import OfferList from './components/offers/OfferList';
 import OfferDetails from './components/offers/OfferDetails';
 import OrderList from './components/orders/OrderList';
 import OrderDetails from './components/orders/OrderDetails';
+import Profile from './components/auth/EditProfile'
 
 
 class App extends Component {
@@ -55,6 +56,7 @@ class App extends Component {
           <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
             <Route exact path="/" component={Joc} />
+            <Route exact path="/edit-profile" render={() => <Profile loggedInUser={this.state.loggedInUser} />} />
             <Route path='/offers/:id' render={(props) => <OfferDetails loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/offers' component={OfferList} />
             <Route path='/orders/:id' render={(props) => <OrderDetails loggedInUser={this.state.loggedInUser} {...props} />} />
