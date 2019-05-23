@@ -64,14 +64,14 @@ class OfferDetails extends Component {
   ownershipCheck = (offer) => {
     console.log(this.props.loggedInUser);
     console.log(offer.owner);
-    // if(this.props.loggedInUser && offer.owner === this.props.loggedInUser._id){
+    if(offer.owner._id === this.props.loggedInUser._id){
     return (
       <div>
         <div>{this.renderEditForm()} </div>
         <button onClick={() => this.deleteOffer(this.state._id)}>Delete offer</button>
       </div>
     )
-    // } 
+    } 
   }
 
 
