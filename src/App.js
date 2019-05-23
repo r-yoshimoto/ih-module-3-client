@@ -11,7 +11,8 @@ import Joc from './components/Joc';
 import OfferList from './components/offers/OfferList';
 import OfferDetails from './components/offers/OfferDetails';
 import OrderList from './components/orders/OrderList';
-import OrderDetails from './components/orders/OrderDetails'
+import OrderDetails from './components/orders/OrderDetails';
+
 
 class App extends Component {
 
@@ -54,10 +55,10 @@ class App extends Component {
           <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
             <Route exact path="/" component={Joc} />
-            <Route path='/offers/:id' component={OfferDetails} />
+            <Route path='/offers/:id' render={(props) => <OfferDetails loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/offers' component={OfferList} />
-            <Route path='/orders/:id' component={OrderDetails} />
-            <Route path='/orders' component={OrderList} />
+            <Route path='/orders/:id' render={(props) => <OrderDetails loggedInUser={this.state.loggedInUser} {...props} />} />
+            <Route path='/orders' render={(props) => <OrderList loggedInUser={this.state.loggedInUser} {...props} />}  />
           </Switch>
         </section>
       );
@@ -69,7 +70,7 @@ class App extends Component {
             <Route exact path='/signup' render={() => <SignUp getUser={this.getTheUser} />} />
             <Route exact path='/confirm/:token' render={(props) => <Confirm getUser={this.getTheUser} {...props} />} />
             <Route exact path='/login' render={(props) => <Login getUser={this.getTheUser} {...props} />} />
-            <Route path='/offers/:id' component={OfferDetails} />
+            <Route path='/offers/:id' render={(props) => <OfferDetails loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/offers' component={OfferList} />
 
           </Switch>
