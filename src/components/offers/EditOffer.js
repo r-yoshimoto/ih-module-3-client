@@ -45,18 +45,36 @@ class EditOffer extends Component {
 render(){
   return(
     <div>
+    <p className="title">Edit item</p>
       <form onSubmit={this.handleFormSubmit}>
-        <label>Title:</label>
-        <input type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
-        <label>Description:</label>
-        <textarea name="description" value={this.state.description} onChange={ e => this.handleChange(e)} />
-        <label>Price:</label>
-        <input type="number" name="price" value={this.state.price} onChange={ e => this.handleChange(e)} />
-        <label>Unity:</label>
-        <input type="text"  name="unity" value={this.state.unity} onChange={ e => this.handleChange(e)} />
-        <label>Minimum:</label>
-        <input type="number" name="minimum" value={this.state.minimum} onChange={ e => this.handleChange(e)} />
-        <label>Category:</label>
+       <div className="field">
+        <label className="label">Title:</label>
+        <input className="input" type="text" name="title" value={this.state.title} onChange={ e => this.handleChange(e)}/>
+        </div>
+       
+        <div className="field">
+        <label className="label">Description:</label>
+        <textarea className="textarea" name="description" value={this.state.description} onChange={ e => this.handleChange(e)} />
+        </div>
+
+        <div className="field">
+        <label className="label">Price:</label>
+        <input className="input" type="number" name="price" value={this.state.price} onChange={ e => this.handleChange(e)} />
+        </div>
+
+        <div className="field">
+        <label className="label">Unity:</label>
+        <input className="input" type="text"  name="unity" value={this.state.unity} onChange={ e => this.handleChange(e)} />
+        </div>
+
+        <div className="field">
+        <label className="label">Minimum:</label>
+        <input className="input" type="number" name="minimum" value={this.state.minimum} onChange={ e => this.handleChange(e)} />
+        </div>
+
+        <div className="field">
+        <label className="label">Category:</label>
+        <div className="select">
         <select name='category' value={this.state.category} onChange={ e => this.handleChange(e)} >
           <option value="Fruits">Fruits</option>
           <option value="Flowers">Flowers</option>
@@ -64,7 +82,14 @@ render(){
           <option value="Vegetables">Vegetables</option>
           <option value="None of above">None of above</option>    
         </select>
-        <input type="submit" value="Submit" />
+        </div>
+        </div>
+
+        <div className="field is-grouped">
+  <div className="control">
+        <input className="button is-link" type="submit" value="Submit" />
+        </div>
+          </div>
       </form>
     </div>
   )

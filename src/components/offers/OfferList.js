@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -25,12 +25,15 @@ class OfferList extends Component {
 
   render() {
     return (
-      <div>
-        <div style={{ width: '60%', float: "left" }}>
+      <Fragment>
+      <div className="columns">
+        <div className="column is-half">
+        <div className="list is-hoverable">
           {this.state.listOfOffers.map(offer => {
             return (
+              
               <div key={offer._id}>
-                <Link to={`/offers/${offer._id}`}>
+                <Link className="list-item" to={`/offers/${offer._id}`}>
                   <h3>{offer.title}</h3>
                 </Link>
                 {/* 🥁 added so the tasks can be displayed:  🥁 */}
@@ -41,14 +44,23 @@ class OfferList extends Component {
                 </ul>   */}
                 {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}
               </div>
+            
             )
-          })
+          })          
           }
+          </div>
         </div>
-        <div style={{ width: '40%', float: "right" }}>
+        <div className="column is-half">
           <AddOffer getData={() => this.getAllOffers()} />
         </div>
+</div>
+
+      <div className="columns">
+        <div className="column">
+        <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
+        </div>
       </div>
+      </Fragment>
     )
   }
 }
