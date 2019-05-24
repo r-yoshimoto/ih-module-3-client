@@ -26,40 +26,50 @@ class OfferList extends Component {
   render() {
     return (
       <Fragment>
-      <div className="columns">
-        <div className="column is-half">
-        <div className="list is-hoverable">
-          {this.state.listOfOffers.map(offer => {
-            return (
-              
-              <div key={offer._id}>
-                <Link className="list-item" to={`/offers/${offer._id}`}>
-                  <h3>{offer.title}</h3>
-                </Link>
-                {/* 🥁 added so the tasks can be displayed:  🥁 */}
-                {/* <ul>
-                  { offer.tasks.map((task, index) => {
-                    return <li key={index}>{task.title}</li>
-                  }) }
-                </ul>   */}
-                {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}
-              </div>
-            
-            )
-          })          
-          }
+        <div className="columns">
+          <div className="column is-half">
+            <div className="list is-hoverable">
+              {this.state.listOfOffers.map(offer => {
+                
+                return (
+
+                  <div key={offer._id}>
+                    <Link className="list-item" to={`/offers/${offer._id}`}>
+                      <h3>{offer.title}</h3>
+                    </Link>
+                    
+                  </div>
+
+                )
+              })
+              }
+            </div>
+            <div className="list is-hoverable">
+              {this.state.listOfOffers.map(offer => {
+                return (
+
+                  <div key={offer._id}>
+                    <Link className="list-item" to={`/offers/${offer._id}`}>
+                      <h3>{offer.title}</h3>
+                    </Link>
+                    
+                  </div>
+
+                )
+              })
+              }
+            </div>
+          </div>
+          <div className="column is-half">
+            <AddOffer getData={() => this.getAllOffers()} />
           </div>
         </div>
-        <div className="column is-half">
-          <AddOffer getData={() => this.getAllOffers()} />
-        </div>
-</div>
 
-      <div className="columns">
-        <div className="column">
-        <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
+        <div className="columns">
+          <div className="column">
+            <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
+          </div>
         </div>
-      </div>
       </Fragment>
     )
   }
