@@ -21,6 +21,7 @@ class OrderList extends Component {
 
   componentDidMount() {
     this.getAllOrders();
+    
   }
 
   ownershipCheck = (order) => {
