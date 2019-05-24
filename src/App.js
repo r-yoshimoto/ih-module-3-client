@@ -56,7 +56,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Joc} />
             <Route path='/offers/:id' render={(props) => <OfferDetails loggedInUser={this.state.loggedInUser} {...props} />} />
-            <Route path='/offers' component={OfferList} />
+            <Route path='/offers' render={(props) => <OfferList loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/orders/:id' render={(props) => <OrderDetails loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/orders' render={(props) => <OrderList loggedInUser={this.state.loggedInUser} {...props} />}  />
           </Switch>
