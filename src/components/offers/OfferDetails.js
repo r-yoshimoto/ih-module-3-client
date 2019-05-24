@@ -127,13 +127,14 @@ class OfferDetails extends Component {
     else {
       return (
         <div><div>
-        <h1>{this.state.title}</h1>
-          <p>{this.state.description}</p>
-          <p>{this.state.price}</p>
-          <p>{this.state.unity}</p>
-          <p>{this.state.minimum}</p>
-          <p>{this.state.category}</p>
-          <p>{this.state.owner.fullName}</p>
+        <h3 className="title is-3">Title: {this.state.title}</h3>
+          
+          <p>Unity Price: {this.state.price}$</p>
+          <p>Unity: {this.state.unity}</p>
+          <p>Minimum Quantity: {this.state.minimum}</p>
+          <p>Categroy: {this.state.category}</p>
+          <p>Seller: {this.state.owner.fullName}</p>
+          <p>Description: {this.state.description}</p>
         <form onSubmit={this.handleFormSubmit}>
           <input type="hidden" name="title" value={this.state.title} />
           <input type="hidden" name="description" value={this.state.description} />
@@ -142,10 +143,10 @@ class OfferDetails extends Component {
           <input type="hidden" name="minimum" value={this.state.minimum} />
           <input type="hidden" name="category" value={this.state.category} />
           <input type="hidden" name="owner" value={this.state.owner._id} />
-          <label>Quantity</label>
-          <input type="number" name="total" value={this.state.total} onChange={e => this.handleChange(e)} />
-          <label>Total Price: {this.state.totalPrice}</label>
-          <input type="submit" value="Submit" />
+          <label>Quantity:</label>
+          <input className="input" type="number" min="0" name="total" value={this.state.total} onChange={e => this.handleChange(e)} />
+          <label>Total Price: {this.state.totalPrice}$</label>
+          <p><input className="button is-link" type="submit" value="Purchase" /></p>
         </form>
 
 
