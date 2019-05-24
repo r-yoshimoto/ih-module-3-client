@@ -24,54 +24,116 @@ class OfferList extends Component {
   }
 
   render() {
-    return (
-      <Fragment>
-        <div className="columns">
-          <div className="column is-half">
-            <div className="list is-hoverable">
-              {this.state.listOfOffers.map(offer => {
-                
-                return (
+    if (this.props.loggedInUser._id) {
+      return (
+        <Fragment>
+          <div className="columns">
+            <div className="column is-half">
+              <div className="list is-hoverable">
+                {this.state.listOfOffers.map(offer => {
+                  console.log(offer.owner._id)
+                  if (offer.owner._id !== this.props.loggedInUser._id) {
+                    return (
 
-                  <div key={offer._id}>
-                    <Link className="list-item" to={`/offers/${offer._id}`}>
-                      <h3>{offer.title}</h3>
-                    </Link>
-                    
-                  </div>
+                      <div key={offer._id}>
+                        <Link className="list-item" to={`/offers/${offer._id}`}>
+                          <h3>{offer.title}</h3>
+                        </Link>
 
-                )
-              })
-              }
+                      </div>
+
+                    )
+                  }
+                })
+                }
+              </div>
+              <div className="list is-hoverable">
+                <p>My Offers</p>
+                {this.state.listOfOffers.map(offer => {
+                  if (offer.owner._id === this.props.loggedInUser._id) {
+                    return (
+
+                      <div key={offer._id}>
+                        <Link className="list-item" to={`/offers/${offer._id}`}>
+                          <h3>{offer.title}</h3>
+                        </Link>
+
+                      </div>
+
+                    )
+                  }
+                })
+                }
+              </div>
             </div>
-            <div className="list is-hoverable">
-              {this.state.listOfOffers.map(offer => {
-                return (
-
-                  <div key={offer._id}>
-                    <Link className="list-item" to={`/offers/${offer._id}`}>
-                      <h3>{offer.title}</h3>
-                    </Link>
-                    
-                  </div>
-
-                )
-              })
-              }
+            <div className="column is-half">
+              <AddOffer getData={() => this.getAllOffers()} />
             </div>
           </div>
-          <div className="column is-half">
-            <AddOffer getData={() => this.getAllOffers()} />
-          </div>
-        </div>
 
-        <div className="columns">
-          <div className="column">
-            <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
+          <div className="columns">
+            <div className="column">
+              <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
+            </div>
           </div>
-        </div>
-      </Fragment>
-    )
+        </Fragment>
+      )
+    }
+    else{
+      // return (
+      //   <Fragment>
+      //     <div className="columns">
+      //       <div className="column is-half">
+      //         <div className="list is-hoverable">
+      //           {this.state.listOfOffers.map(offer => {
+                  
+                  
+      //               return (
+
+      //                 <div key={offer._id}>
+      //                   <Link className="list-item" to={`/offers/${offer._id}`}>
+      //                     <h3>{offer.title}</h3>
+      //                   </Link>
+
+      //                 </div>
+
+      //               )
+                  
+      //           })
+      //           }
+      //         </div>
+      //         <div className="list is-hoverable">
+      //           <p>My Offers</p>
+      //           {this.state.listOfOffers.map(offer => {
+      //             if (offer.owner._id === this.props.loggedInUser._id) {
+      //               return (
+
+      //                 <div key={offer._id}>
+      //                   <Link className="list-item" to={`/offers/${offer._id}`}>
+      //                     <h3>{offer.title}</h3>
+      //                   </Link>
+
+      //                 </div>
+
+      //               )
+      //             }
+      //           })
+      //           }
+      //         </div>
+      //       </div>
+      //       <div className="column is-half">
+      //         <AddOffer getData={() => this.getAllOffers()} />
+      //       </div>
+      //     </div>
+
+      //     <div className="columns">
+      //       <div className="column">
+      //         <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
+      //       </div>
+      //     </div>
+      //   </Fragment>
+      // )
+    }
   }
 }
 
