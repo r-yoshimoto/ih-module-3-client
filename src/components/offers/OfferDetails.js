@@ -64,18 +64,18 @@ class OfferDetails extends Component {
   ownershipCheck = (offer) => {
     console.log(this.props.loggedInUser);
     console.log(offer.owner);
-    if(offer.owner._id === this.props.loggedInUser._id){
-    return (
-      <div>
-        <div>{this.renderEditForm()} </div>
-        <div className="field is-group">
-        <div className="control">
-        <button className="button is-danger" onClick={() => this.deleteOffer(this.state._id)}>Delete offer</button>
+    if (offer.owner._id === this.props.loggedInUser._id) {
+      return (
+        <div>
+          <div>{this.renderEditForm()} </div>
+          <div className="field is-group">
+            <div className="control">
+              <button className="button is-danger" onClick={() => this.deleteOffer(this.state._id)}>Delete offer</button>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
-    )
-    } 
+      )
+    }
   }
   ownershipCheck
 
@@ -96,7 +96,7 @@ class OfferDetails extends Component {
       title, description, price, unity, minimum, category, total, totalPrice, owner
     }, { withCredentials: true })
       .then(() => {
-        this.props.history.push('/orders');   
+        this.props.history.push('/orders');
       })
       .catch(error => console.log(error))
   }
@@ -114,55 +114,63 @@ class OfferDetails extends Component {
     // console.log(this.state.owner._id)
     if (this.state.owner) {
       // console.log(this.state.owner._id)
-      if(this.state.owner._id === this.props.loggedInUser._id){
-      return (
-        <div>
-          
+      if (this.state.owner._id === this.props.loggedInUser._id) {
+        return (
           <div>
-            {this.ownershipCheck(this.state)}
-          </div>
-          
 
-          <Link to={'/offers'}>Back to offers</Link>
-        </div>
-      )
+            <div>
+              {this.ownershipCheck(this.state)}
+            </div>
+
+
+            <Link to={'/offers'}>Back to offers</Link>
+          </div>
+        )
       }
-    
+
+      else {
+        return (
+          <div>
+            <div className="column is-half">
+            <p className="title is-3">{this.state.title}</p>
+            <p className="title is-4">Description:</p>
+            <p className="subtitle is-5">{this.state.description}</p>
+            <p className="title is-4">Unity:</p>
+            <p className="subtitle is-5"> {this.state.unity}</p>
+            <p className="title is-4">Minimum Quantity:</p>
+            <p className="subtitle is-5"> {this.state.minimum}</p>
+            <p className="title is-4">Category:</p>
+            <p className="subtitle is-5"> {this.state.category}</p>
+            <p className="title is-4">Seller:</p>
+            <p className="subtitle is-5"> {this.state.owner.fullName}</p>
+            <p className="title is-4">Unity Price:</p>
+            <p className="subtitle is-5"> {this.state.price}$</p>
+            
+            <form onSubmit={this.handleFormSubmit}>
+              <input type="hidden" name="title" value={this.state.title} />
+              <input type="hidden" name="description" value={this.state.description} />
+              <input type="hidden" name="price" value={this.state.price} />
+              <input type="hidden" name="unity" value={this.state.unity} />
+              <input type="hidden" name="minimum" value={this.state.minimum} />
+              <input type="hidden" name="category" value={this.state.category} />
+              <input type="hidden" name="owner" value={this.state.owner._id} />
+              <label className="title is-4 is-spaced">Quantity:</label>
+              <input className="input" type="number" min="0" name="total" value={this.state.total} onChange={e => this.handleChange(e)} />
+              <label className="title is-3 is-spaced">Total Price: {this.state.totalPrice}$</label>
+              <p><input className="button is-link" type="submit" value="Purchase" /></p>
+            </form>
+            </div>
+
+
+          </div>
+        )
+      }
+    }
     else {
       return (
-        <div><div>
-        <h3 className="title is-3">Title: {this.state.title}</h3>
-        
-          <p>Unity Price: {this.state.price}$</p>
-          <p>Unity: {this.state.unity}</p>
-          <p>Minimum Quantity: {this.state.minimum}</p>
-          <p>Category: {this.state.category}</p>
-          <p>Seller: {this.state.owner.fullName}</p>
-          <p>Description: {this.state.description}</p>
-        <form onSubmit={this.handleFormSubmit}>
-          <input type="hidden" name="title" value={this.state.title} />
-          <input type="hidden" name="description" value={this.state.description} />
-          <input type="hidden" name="price" value={this.state.price} />
-          <input type="hidden" name="unity" value={this.state.unity} />
-          <input type="hidden" name="minimum" value={this.state.minimum} />
-          <input type="hidden" name="category" value={this.state.category} />
-          <input type="hidden" name="owner" value={this.state.owner._id} />
-          <label>Quantity:</label>
-          <input className="input" type="number" min="0" name="total" value={this.state.total} onChange={e => this.handleChange(e)} />
-          <label>Total Price: {this.state.totalPrice}$</label>
-          <p><input className="button is-link" type="submit" value="Purchase" /></p>
-        </form>
-
-
-      </div></div>
+        <div>XX</div>
       )
     }
-  }
-  else{
-    return(
-      <div>XX</div>
-    )
-  }
   }
 }
 
