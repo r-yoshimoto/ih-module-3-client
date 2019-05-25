@@ -12,7 +12,8 @@ import OfferList from './components/offers/OfferList';
 import OfferDetails from './components/offers/OfferDetails';
 import OrderList from './components/orders/OrderList';
 import OrderDetails from './components/orders/OrderDetails';
-
+import BuyList from './components/offers/BuyList';
+import PleaseLogin from './components/offers/PleaseLogin';
 
 class App extends Component {
 
@@ -57,6 +58,7 @@ class App extends Component {
             <Route exact path="/" component={Joc} />
             <Route path='/offers/:id' render={(props) => <OfferDetails loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/offers' render={(props) => <OfferList loggedInUser={this.state.loggedInUser} {...props} />} />
+            <Route path='/buy' render={(props) => <BuyList loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/orders/:id' render={(props) => <OrderDetails loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/orders' render={(props) => <OrderList loggedInUser={this.state.loggedInUser} {...props} />}  />
           </Switch>
@@ -70,8 +72,8 @@ class App extends Component {
             <Route exact path='/signup' render={() => <SignUp getUser={this.getTheUser} />} />
             <Route exact path='/confirm/:token' render={(props) => <Confirm getUser={this.getTheUser} {...props} />} />
             <Route exact path='/login' render={(props) => <Login getUser={this.getTheUser} {...props} />} />
-            <Route path='/offers/:id' render={(props) => <OfferDetails loggedInUser={this.state.loggedInUser} {...props} />} />
-            <Route path='/offers' component={OfferList} />
+            <Route path='/offers/:id' component={PleaseLogin}  />
+            <Route path='/buy' component={BuyList} />
 
           </Switch>
         </section>

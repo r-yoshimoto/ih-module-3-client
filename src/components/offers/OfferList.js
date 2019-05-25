@@ -31,11 +31,11 @@ class OfferList extends Component {
           <div className="columns">
             <div className="column is-half">
               <div className="list is-hoverable">
-                <p>Offers</p>
+                <p className="title">My Offers</p>
                 {this.state.listOfOffers.map(offer => {
                   console.log(offer.owner._id)
                   // if(this.props.loggedInUser._id){
-                  if (offer.owner._id !== this.props.loggedInUser._id) {
+                  if (offer.owner._id === this.props.loggedInUser._id) {
                     return (
 
                       <div key={offer._id}>
@@ -51,24 +51,7 @@ class OfferList extends Component {
                 })
                 }
               </div>
-              <div className="list is-hoverable">
-                <p>My Offers</p>
-                {this.state.listOfOffers.map(offer => {
-                  if (offer.owner._id === this.props.loggedInUser._id) {
-                    return (
-
-                      <div key={offer._id}>
-                        <Link className="list-item" to={`/offers/${offer._id}`}>
-                          <h3>{offer.title}</h3>
-                        </Link>
-
-                      </div>
-
-                    )
-                  }
-                })
-                }
-              </div>
+              
             </div>
             <div className="column is-half">
               <AddOffer getData={() => this.getAllOffers()} />

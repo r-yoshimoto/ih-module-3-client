@@ -44,10 +44,13 @@ class NavBar extends Component {
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
             <Link className="navbar-item" to={'/offers'}>
-              Offers
+              My Offers
             </Link>
             <Link className="navbar-item" to={'/orders'}>
               Orders
+            </Link>
+            <Link className="navbar-item" to={'/buy'}>
+              Buy
             </Link>
           </div>
       
