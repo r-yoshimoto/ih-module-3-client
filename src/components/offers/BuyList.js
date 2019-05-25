@@ -33,7 +33,7 @@ class BuyList extends Component {
 
               <div className="list is-hoverable">
                 <p className="title">Offers</p>
-                <table class="table">
+                <table className="table">
                   <thead>
                     <tr>
                       <th><abbr title="Title">Title</abbr></th>
@@ -46,6 +46,7 @@ class BuyList extends Component {
                   </thead>
                   <tbody>
                     {this.state.listOfOffers.map(offer => {
+                      if(offer.owner){
                       if (offer.owner._id !== this.props.loggedInUser._id) {
                         return (
 
@@ -85,6 +86,7 @@ class BuyList extends Component {
 
                         )
                       }
+                    }
                     })
                     }
                   </tbody>
@@ -125,7 +127,7 @@ class BuyList extends Component {
                   </thead>
                   <tbody>
                     {this.state.listOfOffers.map(offer => {
-                      
+                        if(offer.owner){
                         return (
 
                           <tr key={offer._id} className="is-selected">
@@ -163,7 +165,7 @@ class BuyList extends Component {
                           </tr>
 
                         )
-                      
+                        }
                     })
                     }
                   </tbody>

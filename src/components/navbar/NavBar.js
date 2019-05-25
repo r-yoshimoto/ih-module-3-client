@@ -32,53 +32,49 @@ class NavBar extends Component {
     if (this.state.loggedInUser) {
       return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link className="navbar-item" to={"/"}>
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-          </Link>
-      
-          <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-      
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <Link className="navbar-item" to={'/offers'}>
-              My Offers
-            </Link>
-            <Link className="navbar-item" to={'/orders'}>
-              Orders
-            </Link>
-            <Link className="navbar-item" to={'/buy'}>
-              Buy
+          <div className="navbar-brand">
+            <Link className="navbar-item" to={"/"}>
+              <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
             </Link>
 
+            <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
           </div>
 
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-start">
               <Link className="navbar-item" to={'/offers'}>
-                Offer
+                My Offers
             </Link>
               <Link className="navbar-item" to={'/orders'}>
                 Orders
             </Link>
+              <Link className="navbar-item" to={'/buy'}>
+                Buy
+            </Link>
 
             </div>
 
-            <div className="navbar-end">
-            <div className="navbar-item">
-            Hi, {this.state.name}
-</div>
-              <div className="navbar-item">
-                <div className="buttons">
+            <div id="navbarBasicExample" className="navbar-menu">
+              <div className="navbar-start">
 
-                  <Link className="button is-warning" to={'/edit-profile'}>Edit Profile </Link>
-                  <button className="button is-danger" onClick={() => this.logoutUser()}>Logout</button>
 
+              </div>
+
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  Hi, {this.state.name}
+                </div>
+                <div className="navbar-item">
+                  <div className="buttons">
+
+                    <Link className="button is-warning" to={'/edit-profile'}>Edit Profile </Link>
+                    <button className="button is-danger" onClick={() => this.logoutUser()}>Logout</button>
+
+                  </div>
                 </div>
               </div>
             </div>

@@ -33,8 +33,8 @@ class OfferList extends Component {
               <div className="list is-hoverable">
                 <p className="title">My Offers</p>
                 {this.state.listOfOffers.map(offer => {
-                  console.log(offer.owner._id)
-                  // if(this.props.loggedInUser._id){
+                  // console.log(offer.owner._id)
+                  if(offer.owner){
                   if (offer.owner._id === this.props.loggedInUser._id) {
                     return (
 
@@ -46,7 +46,7 @@ class OfferList extends Component {
                       </div>
 
                     )
-                  // }
+                  }
                 }
                 })
                 }
