@@ -19,6 +19,11 @@ class AuthService {
     .then(response => response.data)
   }
 
+  editProfile = (fullName) => {
+    return this.service.post('/editprofile', { fullName })
+    .then(response => response.data)
+  }
+
   confirmEmail = (token) => {
     return this.service.get(`/confirm/${token}`)
     .then(response => response.data)

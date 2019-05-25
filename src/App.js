@@ -12,15 +12,18 @@ import OfferList from './components/offers/OfferList';
 import OfferDetails from './components/offers/OfferDetails';
 import OrderList from './components/orders/OrderList';
 import OrderDetails from './components/orders/OrderDetails';
+
+import Profile from './components/auth/EditProfile'
 import BuyList from './components/offers/BuyList';
 import PleaseLogin from './components/offers/PleaseLogin';
+
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      loggedInUser: null
+      loggedInUser: null,
     }
     this.service = new AuthService();
   }
@@ -30,7 +33,8 @@ class App extends Component {
       this.service.loggedin()
         .then(response => {
           this.setState({
-            loggedInUser: response
+            loggedInUser: response,
+            name: response.fullName.split(" ")[0]
           })
         })
         .catch(err => {
@@ -47,15 +51,15 @@ class App extends Component {
     })
   }
 
-
   render() {
     this.fetchUser()
     if (this.state.loggedInUser) {
       return (
         <section>
-          <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
+          <NavBar userInSession={this.state.loggedInUser} name={this.state.name} getUser={this.getTheUser} />
           <Switch>
             <Route exact path="/" component={Joc} />
+            <Route exact path="/edit-profile" render={() => <Profile loggedInUser={this.state.loggedInUser} getUser={this.getTheUser}/>} />
             <Route path='/offers/:id' render={(props) => <OfferDetails loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/offers' render={(props) => <OfferList loggedInUser={this.state.loggedInUser} {...props} />} />
             <Route path='/buy' render={(props) => <BuyList loggedInUser={this.state.loggedInUser} {...props} />} />
