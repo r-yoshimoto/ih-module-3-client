@@ -79,6 +79,7 @@ class NavBar extends Component {
               </div>
             </div>
           </div>
+          </div>
         </nav>
       )
     } else {
