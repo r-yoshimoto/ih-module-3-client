@@ -24,44 +24,80 @@ class OfferList extends Component {
   }
 
   render() {
-    return (
-      <Fragment>
-      <div className="columns">
-        <div className="column is-half">
-        <div className="list is-hoverable">
-          {this.state.listOfOffers.map(offer => {
-            return (
-              
-              <div key={offer._id}>
-                <Link className="list-item" to={`/offers/${offer._id}`}>
-                  <h3>{offer.title}</h3>
-                </Link>
-                {/* 🥁 added so the tasks can be displayed:  🥁 */}
-                {/* <ul>
-                  { offer.tasks.map((task, index) => {
-                    return <li key={index}>{task.title}</li>
-                  }) }
-                </ul>   */}
-                {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}
-              </div>
-            
-            )
-          })          
-          }
-          </div>
-        </div>
-        <div className="column is-half">
-          <AddOffer getData={() => this.getAllOffers()} />
-        </div>
-</div>
+    // console.log(this.props.loggedInUser)
+    if (this.props.loggedInUser) {
+      return (
+        <Fragment>
+          <div className="columns">
+            <div className="column is-half">
+              <div className="list is-hoverable">
+                <p className="title">My Offers</p>
+                {this.state.listOfOffers.map(offer => {
+                  console.log(offer.owner._id)
+                  // if(this.props.loggedInUser._id){
+                  if (offer.owner._id === this.props.loggedInUser._id) {
+                    return (
 
-      <div className="columns">
-        <div className="column">
-        <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
-        </div>
-      </div>
-      </Fragment>
-    )
+                      <div key={offer._id}>
+                        <Link className="list-item" to={`/offers/${offer._id}`}>
+                          <h3>{offer.title}</h3>
+                        </Link>
+
+                      </div>
+
+                    )
+                  // }
+                }
+                })
+                }
+              </div>
+              
+            </div>
+            <div className="column is-half">
+              <AddOffer getData={() => this.getAllOffers()} />
+            </div>
+          </div>
+
+          {/* <div className="columns">
+            <div className="column">
+              <h1>GLOBAL OFFER LIST WILL GO HERE</h1>
+            </div>
+          </div> */}
+        </Fragment>
+      )
+    }
+    else{
+      return (
+        <Fragment>
+          <div className="columns">
+            <div className="column is-half">
+              <div className="list is-hoverable">
+                {this.state.listOfOffers.map(offer => {
+                  
+                  
+                    return (
+
+                      <div key={offer._id}>
+                        <Link className="list-item" to={`/offers/${offer._id}`}>
+                          <h3>{offer.title}</h3>
+                        </Link>
+
+                      </div>
+
+                    )
+                  
+                })
+                }
+              </div>
+              
+            </div>
+            
+          </div>
+
+          
+        </Fragment>
+      )
+    }
   }
 }
 

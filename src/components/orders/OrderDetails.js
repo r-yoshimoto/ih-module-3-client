@@ -112,6 +112,7 @@ class OrderDetails extends Component {
                 return (
                     <div>
                         <h1>{this.state.title}</h1>
+                        
                         <p>{this.state.description}</p>
                         <p>{this.state.price}</p>
                         <p>{this.state.unity}</p>
