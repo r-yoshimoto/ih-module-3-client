@@ -7,9 +7,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullName: '',
-      email: '',
-      password: '',
+      fullName: this.props.loggedInUser.fullName,
       message: null
     };
     this.service = new AuthService();
@@ -21,7 +19,7 @@ class Profile extends Component {
     const password = this.state.password;
     const email = this.state.email;
 
-    this.service.signUp(fullName, password, email)
+    this.service.editProfile(fullName, password, email)
       .then(newUser => {
         this.setState({
           fullName: "",
@@ -31,6 +29,7 @@ class Profile extends Component {
         this.props.getUser(newUser)
       })
       .catch(error => {
+        console.log(error)
         // console.log(`no dounut for you ${error}`, error.response.data)
         this.setState({
           message: `${error.response.data.message}`
@@ -58,7 +57,7 @@ class Profile extends Component {
               </div>
             </article>)
           }
-          
+
         <form onSubmit={this.handleFormSubmit}>
 
           <div className="field">

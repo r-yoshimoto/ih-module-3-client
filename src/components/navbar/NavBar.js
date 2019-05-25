@@ -14,9 +14,11 @@ class NavBar extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       ...this.state,
-      loggedInUser: nextProps.userInSession
+      loggedInUser: nextProps.userInSession,
+      name: nextProps.name
     })
   }
+
 
   logoutUser = () => {
     this.service.logout()
@@ -25,6 +27,7 @@ class NavBar extends Component {
         this.props.getUser(null);
       })
   }
+
   render() {
     if (this.state.loggedInUser) {
       return (
@@ -53,6 +56,9 @@ class NavBar extends Component {
             </div>
 
             <div className="navbar-end">
+            <div className="navbar-item">
+            Hi, {this.state.name}
+</div>
               <div className="navbar-item">
                 <div className="buttons">
 
