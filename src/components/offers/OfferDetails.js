@@ -128,11 +128,11 @@ class OfferDetails extends Component {
       return (
         <div><div>
         <h3 className="title is-3">Title: {this.state.title}</h3>
-          
+        
           <p>Unity Price: {this.state.price}$</p>
           <p>Unity: {this.state.unity}</p>
           <p>Minimum Quantity: {this.state.minimum}</p>
-          <p>Categroy: {this.state.category}</p>
+          <p>Category: {this.state.category}</p>
           <p>Seller: {this.state.owner.fullName}</p>
           <p>Description: {this.state.description}</p>
         <form onSubmit={this.handleFormSubmit}>
