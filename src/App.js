@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
+import "../node_modules/video-react/dist/video-react.css";
 import { Switch, Route } from 'react-router-dom';
 
 import AuthService from './components/auth/auth-service';
@@ -73,6 +74,7 @@ class App extends Component {
         <section>
           <NavBar userInSession={this.state.loggedInUser} getUser={this.getTheUser} />
           <Switch>
+          <Route exact path="/" component={Joc} />
             <Route exact path='/signup' render={() => <SignUp getUser={this.getTheUser} />} />
             <Route exact path='/confirm/:token' render={(props) => <Confirm getUser={this.getTheUser} {...props} />} />
             <Route exact path='/login' render={(props) => <Login getUser={this.getTheUser} {...props} />} />
